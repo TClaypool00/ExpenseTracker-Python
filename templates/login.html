@@ -8,6 +8,7 @@ Login!
 
 {% block content %}
 <form  method="POST" class="form-group">
+    <h2>Log in!</h2>
     {% csrf_token %}
     {{form|crispy}}
     <button type="submit" class="btn btn-primary">Login</button>
