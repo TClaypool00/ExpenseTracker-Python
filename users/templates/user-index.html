@@ -6,4 +6,10 @@ Users
 
 {% block content %}
 <h1>All users</h1>
+<br>
+{% for user in users %}
+<div class="row">
+    <p>{{user.firstName}}</p>
+</div>
+{% endfor %}
 {% endblock %}
