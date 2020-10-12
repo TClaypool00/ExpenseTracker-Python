@@ -8,3 +8,7 @@ class RegisterForm(forms.Form):
     is_admin = forms.BooleanField(label="Are you an admin?")
     phone_num = forms.IntegerField(label="Phone number")
     salary = forms.FloatField(label="Salary")
+    
+class LoginForm(forms.Form):
+    email = forms.EmailField(label="Email Address",)
+    password = forms.CharField(label="Password")
