@@ -4,11 +4,14 @@
 Register
 {% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <form method="POST"  class="form-group" autocomplete="on">
     <h2>Register!</h2>
     {% csrf_token %}
-    {{form}}
+    {{form|crispy}}
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 {% endblock %}
