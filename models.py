@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class AuthGroup(models.Model):
@@ -184,7 +185,7 @@ class Subscriptions(models.Model):
         db_table = 'subscriptions'
 
 
-class Users(models.Model):
+class Users(AbstractUser):
     userid = models.AutoField(db_column='userId', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(db_column='firstName', max_length=40)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
@@ -193,6 +194,9 @@ class Users(models.Model):
     isadmin = models.BooleanField(db_column='isAdmin')  # Field name made lowercase. This field type is a guess.
     phonenum = models.IntegerField(db_column='phoneNum')  # Field name made lowercase.
     salary = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    
+    def __str__(self):
+        return self.email
 
     class Meta:
         db_table = 'users'
