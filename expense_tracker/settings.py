@@ -122,4 +122,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    "/Git-Repositories/ExpenseTrackerClient-Python/static",
+]
+
 LOGIN_REDIRECT_URL = "/"
