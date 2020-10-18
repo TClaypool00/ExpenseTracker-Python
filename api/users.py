@@ -17,13 +17,7 @@ class UserApi:
 
         data = {"firstName" : first_name, "lastName" : last_name, "email" : email, "password" : password, "isAdmin" : is_admin, "phoneNum": phone_num, "salary": salary}
 
-        data = json.dumps(data)
-        data = str(data)
-        data = data.encode("utf-8")
-
-        req = request.Request(url, data=data)
-
-        request.urlopen(req)
+        self.__json_encode(url, data)
         
     def user_by_id(self, id):
         with request.urlopen(user_url + "get.php?userId=" + id) as user:
@@ -31,3 +25,19 @@ class UserApi:
             data = json.loads(serial_data)
             
         return data
+    
+    def auth_user(self, email, password):
+        url = user_url + "auth.php"
+        
+        data = {"email" : email, "password" : email}
+        self.__json_encode(url, data)
+        
+        
+    def __json_encode(self, url, data):
+        data = json.dumps(data)
+        data = str(data)
+        data = data.encode("utf-8")
+
+        req = request.Request(url, data=data)
+
+        request.urlopen(req)
