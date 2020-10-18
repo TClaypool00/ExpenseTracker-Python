@@ -6,11 +6,10 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 
 class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150, primary_key=True)
+    name = models.CharField(unique=True, max_length=150)
 
     class Meta:
         db_table = 'auth_group'
@@ -39,7 +38,7 @@ class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150, primary_key=True)
+    username = models.CharField(unique=True, max_length=150)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
@@ -129,7 +128,6 @@ class DjangoSession(models.Model):
     expire_date = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'django_session'
 
 
@@ -185,18 +183,22 @@ class Subscriptions(models.Model):
         db_table = 'subscriptions'
 
 
-class Users(AbstractUser):
+class Users(models.Model):
     userid = models.AutoField(db_column='userId', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(db_column='firstName', max_length=40)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=15)
-    isadmin = models.BooleanField(db_column='isAdmin')  # Field name made lowercase. This field type is a guess.
+    isadmin = models.TextField(db_column='isAdmin')  # Field name made lowercase. This field type is a guess.
     phonenum = models.IntegerField(db_column='phoneNum')  # Field name made lowercase.
     salary = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    
-    def __str__(self):
-        return self.email
 
     class Meta:
         db_table = 'users'
+
+class Pets(models.Model):
+    petId = models.AutoField(db_column="petId", primary_key=True)
+    petName = models.CharField(db_column="petName", max_length=22)
+    
+    class Meta:
+        db_table = "pets"
