@@ -1,16 +1,21 @@
+from django.forms.widgets import TextInput, Widget
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model
 from django import forms
-from django.forms.widgets import NumberInput, PasswordInput, TextInput
 
-class RegisterForm(forms.Form):
-    first_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'First Name'}), label=False)
-    last_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Last Name'}), label=False)
-    email = forms.EmailField(widget=TextInput(attrs={'placeholder' : 'Email Address'}), label=False)
-    password = forms.CharField(widget=PasswordInput(attrs={'placeholder' : 'Password'}), label=False)
-    comfirm_password = forms.CharField(widget=PasswordInput(attrs={"placeholder": "Comfirm Password"}), label=False)
-    is_admin = forms.BooleanField(label=False, required=False, widget=forms.HiddenInput)
-    phone_num = forms.IntegerField(widget=NumberInput(attrs={'placeholder' : 'Phone Number'}), label=False)
-    salary = forms.FloatField(widget=NumberInput(attrs={'placeholder' : 'Monthly Salary'}), label=False)
+class RegisterForm(UserCreationForm):
+    firstname = forms.CharField(widget=TextInput(attrs={'placeholder': 'First Name'}), label=False)
+    lastname = forms.CharField(widget=TextInput(attrs={'placeholder': 'Last Name'}), label=False)
+    email = forms.EmailField(widget=TextInput(attrs={'placeholder': 'Email Address'}), label=False)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Comfirm Password'}), label=False)
+    phonenum = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}), label=False)
+    salary = forms.DecimalField(widget=forms.NumberInput(attrs={'placeholder': 'Monthly Salary'}), label=False)
     
-class LoginForm(forms.Form):
-    email = forms.EmailField(widget=TextInput(attrs={'placeholder' : 'Email Address'}), label=False)
+    class Meta:
+        model = get_user_model()
+        fields = ('firstname', 'lastname', 'email', 'password1', 'password2', 'phonenum', 'salary')
+    
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Email Address'}), label=False)
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label=False)

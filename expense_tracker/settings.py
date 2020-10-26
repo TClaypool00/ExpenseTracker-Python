@@ -129,3 +129,7 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = "/"
+
+AUTH_USER_MODEL = 'bills.Users'
+
+AUTHENTICATION_BACKENDS = ['bills.backend.EmailBackend']

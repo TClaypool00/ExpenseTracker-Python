@@ -1,6 +1,6 @@
 from django.db import models
-
-from django.db import models
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
 class Bills(models.Model):
     billid = models.AutoField(db_column='billId', primary_key=True)  # Field name made lowercase.
@@ -37,15 +37,51 @@ class Storeunion(models.Model):
     class Meta:
         db_table = 'storeunion'
         
-class Users(models.Model):
+class CustomUserManager(BaseUserManager):
+    """Define a model manager for User model with no username field."""
+
+    def _create_user(self, email, password=None, **extra_fields):
+        """Create and save a User with the given email and password."""
+        if not email:
+            raise ValueError('The given email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        """Create and save a SuperUser with the given email and password."""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
+        
+class Users(AbstractUser):
     userid = models.AutoField(db_column='userId', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(db_column='firstName', max_length=40)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
-    email = models.CharField(max_length=50)
-    password = models.CharField(max_length=15)
+    email = models.CharField(_('email address'), unique=True, max_length=50)
+    password = models.CharField(db_column='password',max_length=128)
     isadmin = models.TextField(db_column='isAdmin')  # Field name made lowercase. This field type is a guess.
-    phonenum = models.IntegerField(db_column='phoneNum')  # Field name made lowercase.
+    phonenum = models.CharField(db_column='phoneNum', max_length=10)  # Field name made lowercase.
     salary = models.DecimalField(max_digits=10, decimal_places=2)
+    username = None
+    
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    
+    objects = CustomUserManager()
 
     class Meta:
         db_table = 'users'
