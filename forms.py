@@ -25,4 +25,4 @@ class CreateBillForm(forms.Form):
     bill_name = forms.CharField(widget=TextInput(attrs={'placeholder': 'Bill Nickname'}), label=False)
     bill_date = forms.CharField(widget=TextInput(attrs={'placeholder': 'Due Date'}), label=False)
     bill_price = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Price of Bill'}), label=False)
-    is_late = forms.BooleanField(label='Is this bill late?', required=False)
+    is_late = forms.BooleanField(required=False, widget=HiddenInput)
