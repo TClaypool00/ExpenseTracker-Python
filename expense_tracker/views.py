@@ -1,14 +1,13 @@
 from django.shortcuts import redirect, render
 from forms import LoginForm, RegisterForm
-from api.users import UserApi as api
 from django.contrib.auth import views as auth_views
-from django.views import generic
-from django.urls import reverse_lazy
 from forms import RegisterForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required()
 def index(request):
     return render(request, "index.html")
+
 
 class LoginView(auth_views.LoginView):
     form_class = LoginForm
