@@ -6,4 +6,12 @@ Track your expenses!
 
 {% block content %}
 <h1>You can track expenses!</h1>
+<br />
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create a Bill or Loan
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="bills/create">Create a Bill</a>
+    </div>
+</div>
 {% endblock %}
