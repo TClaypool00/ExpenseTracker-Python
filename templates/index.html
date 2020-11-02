@@ -6,9 +6,4 @@ Track your expenses!
 
 {% block content %}
 <h1>You can track expenses!</h1>
-    {% if user.is_authenicated %}
-    <h1>Welcome {{user.username}}</h1>
-    {% else %}
-    <p>Login <a href="/login">Here</a></p>
-    {% endif %}
 {% endblock %}
