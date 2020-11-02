@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create a bill
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Create a bill</h1>
+<form method="post" class="form-group">
+    {% csrf_token %}
+    {{form|crispy}}
+    <label for="stores">Select a Store</label>
+    <select name="storeList" id="stores">
+        {% for store in stores %}
+        <option value={{store.storeId}}>{{store.storeName}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Create Bill</button>
+</form>
+{% endblock %}
