@@ -7,7 +7,8 @@ class Bills(models.Model):
     billname = models.CharField(db_column='billName', max_length=50)  # Field name made lowercase.
     billdate = models.DateField(db_column='BillDate')  # Field name made lowercase.
     billprice = models.DecimalField(db_column='billPrice', max_digits=5, decimal_places=2)  # Field name made lowercase.
-    islate = models.TextField(db_column='isLate')  # Field name made lowercase. This field type is a guess.
+    islate = models.BooleanField(db_column='isLate', default=False)  # Field name made lowercase. This field type is a guess.
+    end_date = models.DateField(db_column='endDate', default='2020-11-6')
     budgetid = models.ForeignKey('Budget', models.DO_NOTHING, db_column='budgetId')  # Field name made lowercase.
     storeid = models.ForeignKey('Storeunion', models.DO_NOTHING, db_column='storeId')  # Field name made lowercase.
 
@@ -18,6 +19,7 @@ class Budget(models.Model):
     budgetid = models.AutoField(db_column='budgetId', primary_key=True)  # Field name made lowercase.
     totalbills = models.DecimalField(db_column='totalBills', max_digits=10, decimal_places=2)  # Field name made lowercase.
     moneyleft = models.DecimalField(db_column='moneyLeft', max_digits=10, decimal_places=2)  # Field name made lowercase.
+    savings_money = models.DecimalField(db_column='savingsMoney', max_digits=10, decimal_places=2, default=500.00)
     userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId')  # Field name made lowercase.
 
     class Meta:
@@ -31,8 +33,9 @@ class Storeunion(models.Model):
     state = models.CharField(max_length=50)
     zip = models.IntegerField()
     phonenum = models.IntegerField(db_column='phoneNum')  # Field name made lowercase.
-    email = models.CharField(max_length=30)
-    website = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    website = models.CharField(max_length=100)
+    is_credit_union = models.BooleanField(db_column='isCreditUnion', default=False)
 
     class Meta:
         db_table = 'storeunion'
@@ -73,10 +76,11 @@ class Users(AbstractUser):
     lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
     email = models.CharField(_('email address'), unique=True, max_length=50)
     password = models.CharField(db_column='password',max_length=128)
-    isadmin = models.TextField(db_column='isAdmin')  # Field name made lowercase. This field type is a guess.
     phonenum = models.CharField(db_column='phoneNum', max_length=10)  # Field name made lowercase.
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     username = None
+    first_name = None
+    last_name = None
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
