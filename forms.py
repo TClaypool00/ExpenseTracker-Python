@@ -1,4 +1,4 @@
-from django.forms.widgets import HiddenInput, NumberInput, TextInput, Widget
+from django.forms.widgets import HiddenInput, NumberInput, TextInput
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django import forms
@@ -26,3 +26,11 @@ class CreateBillForm(forms.Form):
     bill_date = forms.CharField(widget=TextInput(attrs={'placeholder': 'Due Date'}), label=False)
     bill_price = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Price of Bill'}), label=False)
     is_late = forms.BooleanField(required=False, widget=HiddenInput)
+    
+
+class CreateLoanForm(forms.Form):
+    loan_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Loan Nickname'}), label=False)
+    due_date = forms.CharField(widget=TextInput(attrs={'placeholder': 'Due Date'}), label=False)
+    deposit = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Deposit'}), label=False)
+    monthly_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Monthly Amount Due'}), label=False)
+    total_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Total Amount Due'}), label=False)

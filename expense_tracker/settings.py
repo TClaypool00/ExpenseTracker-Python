@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bills.apps.BillsConfig',
     'users.apps.UsersConfig',
+    'loan.apps.LoanConfig'
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, "templates"),
             "users/templates",
-            "templates/registation"
+            "templates/registation",
+            'loan/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
