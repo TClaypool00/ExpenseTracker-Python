@@ -20,6 +20,6 @@ def create(request):
             
             return redirect('/')
     else:
-        store_list = stores.StoreApi.get_all_stores(request)
+        store_list = stores.StoreApi.get_all_stores(stores.StoreApi, is_credit_union=True)
         form = CreateLoanForm()
         return render(request, 'create_loan.html', {'form': form, 'stores' : store_list})
