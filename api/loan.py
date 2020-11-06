@@ -6,10 +6,10 @@ loan_url = base_url + 'loan/'
 
 class LoanApi:
     def get_loan_by_user_id(self, user_id):
-        with request.urlopen(loan_url + 'all?userId=' + user_id) as all:
+        with request.urlopen('http://localhost/ExpenseTrackerAPI-PHP/api/loan/all.php?userId=' + str(user_id)) as all:
             serial_data = all.read()
             data = json.loads(serial_data)
-            
+        
         return data
     
     

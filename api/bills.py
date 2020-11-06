@@ -6,7 +6,7 @@ bill_url = base_url + "bills/"
 
 class BillsApi:
     def get_all_bills_by_user_id(self, user_id):
-        with request.urlopen(bill_url + "all.php?userId=" + user_id) as all:
+        with request.urlopen(bill_url + "all.php?userId=" + str(user_id)) as all:
             serial_data = all.read()
             data = json.loads(serial_data)
         

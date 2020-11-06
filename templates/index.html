@@ -5,7 +5,6 @@ Track your expenses!
 {% endblock %}
 
 {% block content %}
-<h1>You can track expenses!</h1>
 <br />
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create a Bill or Loan
@@ -15,4 +14,56 @@ Track your expenses!
         <a class="dropdown-item" href="loan/create">Create a Loan</a>
     </div>
 </div>
+<br />
+<h3>Your bills</h3>
+<table class="table" aria-describedby="user-bills">
+    <thead>
+        <tr>
+            <th scope="col">Nickname</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Price</th>
+            <th scope="col">Late?</th>
+            <th scope="col">End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bill in bills %}
+        <tr>
+            <td>{{bill.billName}}</td>
+            <td>{{bill.billDate}}</td>
+            <td>${{bill.billPrice}}</td>
+            {% if bill.isLate == '0' %}
+            <td>No</td>
+            {% else %}
+            <td>Yes</td>
+            {% endif %}
+            <td>{{bill.endDate}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br />
+<h3>Your Loans</h3>
+<table class="table" aria-describedby="user-loans">
+    <thead>
+        <tr>
+            <th scope="col">Nickname</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Amount Due(Monthly)</th>
+            <th scope="col">Deposit</th>
+            <th scope="col">Total Amount Due</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for loan in loans %}
+        <tr>
+            <td>{{loan.loanName}}</td>
+            <td>{{loan.dueDate}}</td>
+            <td>${{loan.monthlyAmountDue}}</td>
+            <td>${{loan.deposit}}</td>
+            <td>${{loan.totalAmountDue}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
