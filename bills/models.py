@@ -89,3 +89,16 @@ class Users(AbstractUser):
 
     class Meta:
         db_table = 'users'
+        
+        
+class Misc(models.Model):
+    miscid = models.AutoField(db_column='miscId', primary_key=True)  # Field name made lowercase.
+    misc_name = models.CharField(db_column='miscName', max_length=100, default='Groceries')
+    price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    storeid = models.ForeignKey('Storeunion', models.DO_NOTHING, db_column='storeId')  # Field name made lowercase.
+    date = models.DateField()
+    userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', blank=True, null=True)  # Field name made lowercase.
+    memo = models.CharField(max_length=100, null=True, blank=True)
+
+    class Meta:
+        db_table = 'misc'
