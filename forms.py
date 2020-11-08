@@ -1,4 +1,4 @@
-from django.forms.widgets import HiddenInput, NumberInput, TextInput
+from django.forms.widgets import EmailInput, HiddenInput, NumberInput, TextInput
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django import forms
@@ -34,3 +34,15 @@ class CreateLoanForm(forms.Form):
     deposit = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Deposit'}), label=False)
     monthly_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Monthly Amount Due'}), label=False)
     total_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Total Amount Due'}), label=False)
+    
+class CreateStoreForm(forms.Form):
+    store_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Store Name'}), label=False)
+    address = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Street Address'}), label=False)
+    city = forms.CharField(widget=TextInput(attrs={'placeholder' : 'City'}), label=False)
+    state = forms.CharField(widget=TextInput(attrs={'placeholder' : 'MO'}), label=False)
+    zip = forms.IntegerField(widget=NumberInput(attrs={'placeholder' : 'Postal Zip Code'}), label=False)
+    phone_num = forms.IntegerField(widget=NumberInput(attrs={'placeholder' : 'Customer Service Phone Number'}), label=False)
+    email = forms.EmailField(widget=EmailInput(attrs={'placeholder': 'Customer Service Email'}), label=False)
+    website = forms.CharField(widget=TextInput(attrs={"placeholder" : "Company's Website"}), label=False)
+    is_credit_union = forms.BooleanField(label='Is this a Credit Union', required=False)
+    

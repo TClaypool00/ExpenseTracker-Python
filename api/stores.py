@@ -1,11 +1,11 @@
 from urllib import request
 from .api import base_url
 import json
-from api.users import UserApi
+from api.api import Api
 
 store_url = base_url + 'store-union/'
 
-class StoreApi(UserApi):
+class StoreApi(Api):
     def get_all_stores(self, is_credit_union):
         all_url = store_url + 'all.php?isUnion='
         if is_credit_union == False:
@@ -16,3 +16,9 @@ class StoreApi(UserApi):
         with request.urlopen(url) as all:
             serial_data = all.read()
             return json.loads(serial_data)
+        
+    
+    def create_store(self, store_name, address, city, state, zip, phone_num, email, website, is_credit_union):
+        url = store_url + 'create.php'
+        data = {'storeName' : store_name, 'address' : address, 'city' : city, 'state' : state, 'zip' : zip, 'phoneNum' : phone_num, 'email' : email, 'website': website, 'isCreditUnion': is_credit_union}
+        self.json_encode(self, url, data=data)
