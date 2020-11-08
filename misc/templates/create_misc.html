@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create a Miscellaneous Expense
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Create a Miscellaneous Expense</h1>
+<form method="post" class="form-group">
+    {% csrf_token %}
+    {{form|crispy}}
+    <label for="stores">Select a Store</label>
+    <select name="storeList" id="stores">
+        {% for store in stores %}
+        <option value={{store.storeId}}>{{store.storeName}}</option>
+        {% endfor %}
+    </select>
+    <p>Don't see a the Store you need? <a href="/store/create">Create one!</a></p>
+    <br>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+{% endblock %}

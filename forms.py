@@ -46,3 +46,8 @@ class CreateStoreForm(forms.Form):
     website = forms.CharField(widget=TextInput(attrs={"placeholder" : "Company's Website"}), label=False)
     is_credit_union = forms.BooleanField(label='Is this a Credit Union', required=False)
     
+    
+class CreateMiscForm(forms.Form):
+    misc_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Name'}), label=False)
+    price = forms.DecimalField(widget=NumberInput(attrs={'placeholder': 'Price'}), label=False)
+    memo = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Memo (Optional)'}), label=False, required=False)
