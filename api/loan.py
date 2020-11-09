@@ -1,4 +1,6 @@
 from urllib import request
+
+from django.http.response import Http404
 from .api import base_url
 import json
 
@@ -6,11 +8,14 @@ loan_url = base_url + 'loan/'
 
 class LoanApi:
     def get_loan_by_user_id(self, user_id):
-        with request.urlopen('http://localhost/ExpenseTrackerAPI-PHP/api/loan/all.php?userId=' + str(user_id)) as all:
-            serial_data = all.read()
-            data = json.loads(serial_data)
-        
-        return data
+        try:
+            with request.urlopen(loan_url + 'all.php?userId=' + str(user_id)) as all:
+                serial_data = all.read()
+                data = json.loads(serial_data)
+            
+            return data
+        except Exception:
+            return None
     
     
     def create_loan(self, loan_name, due_date, monthly_amt_due, deposit, total_amt_due, store_id, user_id):

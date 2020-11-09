@@ -1,19 +1,21 @@
-from abc import ABC, abstractmethod
 from urllib import request
 import json
 
 base_url = "http://localhost/ExpenseTrackerAPI-PHP/api/"
 
-class Api(ABC):
+class Api:
     def __init__(self):
         self.base_url = "http://localhost/ExpenseTrackerAPI-PHP/api/"
     
-    def get_all(self, url, user_id):
-        with request.urlopen(url) as all:
-            serial_data = all.read()
-            data = json.loads(serial_data)
-        
-        return data
+    def get_all(self, url,  user_id):
+        try:
+            with request.urlopen(url + 'all.php?userId=' + str(user_id)) as all:
+                serial_data = all.read()
+                data = json.loads(serial_data)
+            
+            return data
+        except Exception:
+            return None
     
     
     def create(self, url, **kargs):

@@ -1,4 +1,6 @@
 from urllib import request
+
+from django.http.response import Http404
 from .api import base_url
 import json
 
@@ -6,11 +8,15 @@ bill_url = base_url + "bills/"
 
 class BillsApi:
     def get_all_bills_by_user_id(self, user_id):
-        with request.urlopen(bill_url + "all.php?userId=" + str(user_id)) as all:
-            serial_data = all.read()
-            data = json.loads(serial_data)
-        
-        return data
+        try:
+            with request.urlopen(bill_url + "all.php?userId=" + str(user_id)) as all:
+                serial_data = all.read()
+                data = json.loads(serial_data)
+            
+            return data
+        except Exception:
+            return None
+            
     
     
     def create_bill(self, bill_name, bill_date, bill_price, is_late, store_id, user_id):
