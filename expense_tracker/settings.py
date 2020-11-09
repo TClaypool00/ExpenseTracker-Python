@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'loan.apps.LoanConfig',
     'misc.apps.MiscConfig',
     'store.apps.StoreConfig',
+    'subscription.apps.SubscriptionConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,7 @@ TEMPLATES = [
             'loan/templates',
             'misc/templates',
             'store/templates',
+            'subscription/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

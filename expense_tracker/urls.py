@@ -29,4 +29,5 @@ urlpatterns = [
     path('loan/', include('loan.urls')),
     path('misc/', include('misc.urls')),
     path('store/', include('store.urls')),
+    path('subscription/', include('subscription.urls')),
 ]
