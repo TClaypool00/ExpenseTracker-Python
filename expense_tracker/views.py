@@ -3,15 +3,23 @@ from forms import LoginForm, RegisterForm
 from django.contrib.auth import views as auth_views
 from forms import RegisterForm
 from django.contrib.auth.decorators import login_required
-from api import bills, loan
+from api import api
+from api.loan import loan_url
+from api.bills import bill_url
+from api.subs import sub_url
+from api.misc import misc_url
 
 @login_required()
 def index(request):
     user_id = request.user.userid
-    user_bills = bills.BillsApi.get_all_bills_by_user_id(request, user_id)
-    user_loans = loan.LoanApi.get_loan_by_user_id(request, user_id)
+    user_bills = api.Api.get_all(api, bill_url, user_id)
+    user_loans = api.Api.get_all(api, loan_url, user_id)
+    user_subs = api.Api.get_all(api, sub_url, user_id)
+    user_misc = api.Api.get_all(api, misc_url, user_id)
     
-    return render(request, "index.html", {'bills' : user_bills, 'loans' : user_loans})
+    CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc}
+    
+    return render(request, "index.html", CONTEXT)
 
 
 class LoginView(auth_views.LoginView):
@@ -26,5 +34,5 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/login')
     return render(request, 'register.html', {'form': form})
