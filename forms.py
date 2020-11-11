@@ -51,7 +51,7 @@ class CreateStoreForm(forms.Form):
     
 class CreateMiscForm(forms.Form):
     misc_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Name'}), label=False)
-    price = forms.DecimalField(widget=NumberInput(attrs={'placeholder': 'Price'}), label=False)
+    price = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Price'}), label=False)
     memo = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Memo (Optional)'}), label=False, required=False)
     
     

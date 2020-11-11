@@ -16,9 +16,8 @@ def create(request):
             price = form.cleaned_data['price']
             user_id = request.user.userid
             store_id = request.POST.get('storeList', 1)
-            cur_date = date.today()
             
-            api.create_misc(api, price, store_id, cur_date, user_id, memo, misc_name)
+            api.create_misc(api, price, store_id, user_id, memo, misc_name)
             
             return redirect('/')
     else:
