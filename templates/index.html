@@ -30,14 +30,10 @@ Track your expenses!
                 <td>{{bill.billName}}</td>
                 <td>{{bill.billDate}}</td>
                 <td>${{bill.billPrice}}</td>
-                {% if bill.isLate == '0' %}
-                <td>No</td>
-                {% else %}
-                <td>Yes</td>
-                {% endif %}
+                <td>{% if bill.isLate == '0' %} No {% else %} Yes {% endif %}</td>
                 <td>{{bill.endDate}}</td>
                 <td>{{bill.storeName}}</td>
-                <td><a href="https://{{bill.storeWebsite}}">{{bill.storeWebsite}}</a></td>
+                <td><a href="https://{{bill.storeWebsite}}" target="_blank">{{bill.storeWebsite}}</a></td>
             </tr>
             {% endfor %}
         {% endif %}
@@ -93,16 +89,18 @@ Track your expenses!
         <tr>
             {% if subs == None %}
                 <td colspan="5" style="text-align: center;">You have no Subscriptions.</td>
+                
             {% else %}
                 {% for sub in subs %}
                     <td>{{sub.subName}}</td>
-                    <td>{{sub.dueDate}</td>
-                    <td>{{sub.amountDue}</td>
-                    <td><{{sub.storeName}/td>
-                    <td>{{sub.storeWebsite}</td>
+                    <td>{{sub.dueDate}}</td>
+                    <td>${{sub.amountDue}}</td>
+                    <td>{{sub.storeName}}</td>
+                    <td><a href="https://{{sub.storeWebsite}}" target="_blank">{{sub.storeWebsite}}</a></td>
+                </tr>
                 {% endfor %}
             {% endif %}
-        </tr>
+        
     </tbody>
 </table>
 <br />
@@ -110,7 +108,7 @@ Track your expenses!
 <table class="table" aria-describedby="user-misc">
     <thead>
         <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Title</th>
             <th scope="col">Date</th>
             <th scope="col">Price</th>
             <th scope="col">Memo</th>
@@ -120,17 +118,17 @@ Track your expenses!
     <tbody>
         <tr>
             {% if miscs == None %}
-                <td colspan="5" style="text-align: center;">You have no Miscellaneous Expenses.</td>
+                <td colspan="4" style="text-align: center;">You have no Miscellaneous.</td>
             {% else %}
-                {% for miscs in misc %}
+                {% for misc in miscs %}
                     <td>{{misc.miscName}}</td>
                     <td>{{misc.date}}</td>
                     <td>{{misc.price}}</td>
                     <td>{{misc.memo}}</td>
                     <td>{{misc.storeName}}</td>
+                </tr>
                 {% endfor %}
             {% endif %}
-        </tr>
     </tbody>
 </table>
 {% endblock %}
