@@ -103,3 +103,15 @@ class Misc(models.Model):
 
     class Meta:
         db_table = 'misc'
+        
+        
+class Subscriptions(models.Model):
+    subid = models.AutoField(db_column='subId', primary_key=True)  # Field name made lowercase.
+    duedate = models.DateField(db_column='dueDate')  # Field name made lowercase.
+    amountdue = models.DecimalField(db_column='amountDue', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    storeid = models.ForeignKey(Storeunion, models.DO_NOTHING, db_column='storeId')  # Field name made lowercase.
+    subname = models.CharField(db_column='subName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        db_table = 'subscriptions'
