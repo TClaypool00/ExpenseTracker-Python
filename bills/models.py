@@ -28,14 +28,15 @@ class Budget(models.Model):
 class Storeunion(models.Model):
     storeid = models.AutoField(db_column='storeId', primary_key=True)  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=50)  # Field name made lowercase.
-    address = models.CharField(max_length=60)
-    city = models.CharField(max_length=70)
-    state = models.CharField(max_length=50)
-    zip = models.IntegerField()
-    phonenum = models.IntegerField(db_column='phoneNum')  # Field name made lowercase.
-    email = models.CharField(max_length=50)
+    address = models.CharField(max_length=60, null=True)
+    city = models.CharField(max_length=70, null=True)
+    state = models.CharField(max_length=50, null=True)
+    zip = models.IntegerField(null=True)
+    phonenum = models.IntegerField(db_column='phoneNum', null=True)  # Field name made lowercase.
+    email = models.CharField(max_length=50, null=True)
     website = models.CharField(max_length=100)
     is_credit_union = models.BooleanField(db_column='isCreditUnion', default=False)
+    is_completed = models.BooleanField(db_column="IsCompleted", default=True)
 
     class Meta:
         db_table = 'storeunion'
