@@ -8,6 +8,7 @@ from api.loan import loan_url
 from api.bills import bill_url
 from api.subs import sub_url
 from api.misc import misc_url
+from api.budgets import budget_url
 
 @login_required()
 def index(request):
@@ -16,8 +17,9 @@ def index(request):
     user_loans = api.Api.get_all(api, loan_url, user_id)
     user_subs = api.Api.get_all(api, sub_url, user_id)
     user_misc = api.Api.get_all(api, misc_url, user_id)
+    user_budget = api.Api.get_all(api, budget_url, user_id)
     
-    CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc}
+    CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc, 'budget' : user_budget}
     
     return render(request, "index.html", CONTEXT)
 
