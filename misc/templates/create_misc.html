@@ -13,9 +13,13 @@ Create a Miscellaneous Expense
     {{form|crispy}}
     <label for="stores">Select a Store</label>
     <select name="storeList" id="stores">
-        {% for store in stores %}
-        <option value={{store.storeId}}>{{store.storeName}}</option>
-        {% endfor %}
+        {% if stores is not None %}
+            {% for store in stores %}
+            <option value={{store.storeId}}>{{store.storeName}}</option>
+            {% endfor %}
+        {% else %}
+        <option disabled>No stores avaible</option>
+        {% endif %}
     </select>
     <p>Don't see a the Store you need? <a href="/store/create">Create one!</a></p>
     <br>

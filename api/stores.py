@@ -13,9 +13,12 @@ class StoreApi(Api):
         else:
             url = all_url + '1'
         
-        with request.urlopen(url) as all:
-            serial_data = all.read()
-            return json.loads(serial_data)
+        try:
+            with request.urlopen(url) as all:
+                serial_data = all.read()
+                return json.loads(serial_data)
+        except Exception:
+            return None
         
     
     def create_store(self, store_name, address, city, state, zip, phone_num, email, website, is_credit_union):

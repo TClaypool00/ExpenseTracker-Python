@@ -13,12 +13,16 @@ Create a bill
     {{form|crispy}}
     <label for="stores">Select a Store</label>
     <select name="storeList" id="stores">
-        {% for store in stores %}
-        <option value={{store.storeId}}>{{store.storeName}}</option>
-        {% endfor %}
+        {% if stores is not None %}
+            {% for store in stores %}
+            <option value={{store.storeId}}>{{store.storeName}}</option>
+            {% endfor %}
+        {% else %}
+        <option disabled>No stores avaible</option>
+        {% endif %}
     </select>
     <p>Don't see a the Store you need? <a href="/store/create">Create one!</a></p>
     <br>
-    <button type="submit" class="btn btn-primary">Create Bill</button>
+    <button type="submit" class="btn btn-primary" {% if stores is None %} disabled {% endif %}>Create Bill</button>
 </form>
 {% endblock %}
