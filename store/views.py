@@ -19,6 +19,11 @@ def create(request):
             website = form.cleaned_data['website']
             is_credit_union = form.cleaned_data['is_credit_union']
             
+            if post_code == None:
+                post_code = 0
+            if phone_num == None:
+                phone_num = 0
+            
             api.create_store(base, store_name, address, city, state, post_code, phone_num, email, website, is_credit_union)
             
             return redirect('/')
