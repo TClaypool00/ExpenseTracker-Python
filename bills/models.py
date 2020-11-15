@@ -5,11 +5,11 @@ from django.utils.translation import gettext_lazy as _
 class Bills(models.Model):
     billid = models.AutoField(db_column='billId', primary_key=True)  # Field name made lowercase.
     billname = models.CharField(db_column='billName', max_length=50)  # Field name made lowercase.
-    billdate = models.DateField(db_column='BillDate')  # Field name made lowercase.
+    billdate = models.DateField(db_column='billDate')  # Field name made lowercase.
     billprice = models.DecimalField(db_column='billPrice', max_digits=5, decimal_places=2)  # Field name made lowercase.
     islate = models.BooleanField(db_column='isLate', default=False)  # Field name made lowercase. This field type is a guess.
-    end_date = models.DateField(db_column='endDate', default='2020-11-6')
-    budgetid = models.ForeignKey('Budget', models.DO_NOTHING, db_column='budgetId')  # Field name made lowercase.
+    is_paid = models.BooleanField(db_column="isPaid", default=False)
+    user_id = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', default=1)  # Field name made lowercase.
     storeid = models.ForeignKey('Storeunion', models.DO_NOTHING, db_column='storeId')  # Field name made lowercase.
 
     class Meta:
@@ -36,7 +36,7 @@ class Storeunion(models.Model):
     email = models.CharField(max_length=50, null=True)
     website = models.CharField(max_length=100)
     is_credit_union = models.BooleanField(db_column='isCreditUnion', default=False)
-    is_completed = models.BooleanField(db_column="IsCompleted", default=True)
+    is_completed = models.BooleanField(db_column="isCompleted", default=True)
 
     class Meta:
         db_table = 'storeunion'
@@ -112,6 +112,25 @@ class Subscriptions(models.Model):
     storeid = models.ForeignKey(Storeunion, models.DO_NOTHING, db_column='storeId')  # Field name made lowercase.
     subname = models.CharField(db_column='subName', max_length=50, blank=True, null=True)  # Field name made lowercase.
     userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', blank=True, null=True)  # Field name made lowercase.
+    is_late  = models.BooleanField(db_column='isLate', default=False)
+    is_paid = models.BooleanField(db_column='isPaid', default=False)
 
     class Meta:
         db_table = 'subscriptions'
+        
+        
+class Loan(models.Model):
+    loanid = models.AutoField(db_column='loanId', primary_key=True)  # Field name made lowercase.
+    loanname = models.CharField(db_column='loanName', max_length=50)  # Field name made lowercase.
+    duedate = models.DateField(db_column='dueDate')  # Field name made lowercase.
+    monthlyamountdue = models.DecimalField(db_column='monthlyAmountDue', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    deposit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    totalamountdue = models.DecimalField(db_column='totalAmountDue', max_digits=10, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    storeid = models.ForeignKey('Storeunion', models.DO_NOTHING, db_column='storeId', default=1)  # Field name made lowercase.
+    userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', default=1)  # Field name made lowercase.
+    is_late  = models.BooleanField(db_column='isLate', default=False)
+    is_paid = models.BooleanField(db_column='isPaid', default=False)
+    amount_remaining = models.DecimalField(db_column='amountRemaining', default=500, max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'loan'

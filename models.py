@@ -145,21 +145,6 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Loan(models.Model):
-    loanid = models.AutoField(db_column='loanId', primary_key=True)  # Field name made lowercase.
-    loanname = models.CharField(db_column='loanName', max_length=50)  # Field name made lowercase.
-    duedate = models.DateField(db_column='dueDate')  # Field name made lowercase.
-    monthlyamountdue = models.DecimalField(db_column='monthlyAmountDue', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    deposit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    totalamountdue = models.DecimalField(db_column='totalAmountDue', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    storeid = models.IntegerField(db_column='storeId')  # Field name made lowercase.
-    userid = models.ForeignKey('Users', models.DO_NOTHING, db_column='userId', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'loan'
-
-
 class Storeunion(models.Model):
     storeid = models.AutoField(db_column='storeId', primary_key=True)  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=50)  # Field name made lowercase.
