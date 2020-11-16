@@ -17,10 +17,11 @@ Track your expenses!
 </div>
 <form method="post" class="form-group">
     {% csrf_token %}
-    <button class="btn btn-primary float-right" {% if bills is None and  subs is None and loans is None %} disabled {% endif %}>{% if budget is None %} Create Budget! {% else %} Update Budget {% endif %}</button>
+    {% if budget is None %}<button class="btn btn-primary float-right" {% if bills is None and  subs is None and loans is None %} disabled {% endif %}>Create Budget!</button>{% endif %}
 </form>
 {% if budget is not None %}
     <div class="box">
+        <h2>Your Budget</h2>
         <p>Your total amount of bills: {{budget.totalBills}}</p>
         <p>Money left: {{budget.moneyLeft}}</p>
         <p>{% if budget.savingsMoney == '0.00' %}No savings. {% else %} Savings: {{budget.savingsMoney}} {% endif %} </p>

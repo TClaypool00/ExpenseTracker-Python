@@ -22,10 +22,7 @@ def index(request):
     user_misc = api.Api.get_all(api, misc_url, user_id)
     CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc, 'budget' : user_budget}
     if request.method == 'POST':
-        if user_budget is None:
-            BudgetApi.create_budget(Api, user_id)
-        else:
-            BudgetApi.update_budget(Api,user_id, 'budget.savingsMoney', 'budget.budgetId')
+        BudgetApi.create_budget(Api, user_id)
         
         return redirect('/')
     else:
