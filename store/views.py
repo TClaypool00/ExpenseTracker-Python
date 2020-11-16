@@ -23,10 +23,12 @@ def create(request):
                 post_code = 0
             if phone_num == None:
                 phone_num = 0
+                
+            redirect_url = request.GET.get('next', '/')
             
             api.create_store(base, store_name, address, city, state, post_code, phone_num, email, website, is_credit_union)
             
-            return redirect('/')
+            return redirect(redirect_url)
     else:
         form = CreateStoreForm()
         return render(request, 'create_store.html', {'form' : form})

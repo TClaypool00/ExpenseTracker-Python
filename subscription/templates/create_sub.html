@@ -21,7 +21,7 @@ Create a Subscription
         <option disabled>No stores avaible</option>
         {% endif %}
     </select>
-    <p>Don't see a the Store you need? <a href="/store/create">Create one!</a></p>
+    <p>Don't see a the Store you need? <a href="/store/create?next={{request.path}}">Create one!</a></p>
     <br>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>

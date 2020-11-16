@@ -11,8 +11,8 @@ Track your expenses!
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="/bills/create">Create a Bill</a>
         <a class="dropdown-item" href="/loan/create">Create a Loan</a>
-        <a {% if budget is not None %} href="/misc/create" {% endif %} class="dropdown-item">Create a Miscellaneous </a>
         <a href="/subscription/create" class="dropdown-item" aria-disabled="tr">Create a Subscription</a>
+        {% if budget is not None %}<a href="/misc/create" class="dropdown-item">Create a Miscellaneous </a>{% endif %}
     </div>
 </div>
 <button class="btn btn-primary float-right" {% if bills is None and  subs is None and loans is None %} disabled {% endif %}>{% if budget is None %} Create Budget! {% else %} Update Budget {% endif %}</button>
