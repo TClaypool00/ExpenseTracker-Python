@@ -39,13 +39,13 @@ class CreateLoanForm(forms.Form):
     
 class CreateStoreForm(forms.Form):
     store_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Store Name'}), label=False)
+    website = forms.CharField(widget=TextInput(attrs={"placeholder" : "Company's Website"}), label=False)
     address = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Street Address'}), label=False, required=False)
     city = forms.CharField(widget=TextInput(attrs={'placeholder' : 'City'}), label=False, required=False)
     state = forms.CharField(widget=TextInput(attrs={'placeholder' : 'MO'}), label=False, required=False)
     zip = forms.IntegerField(widget=NumberInput(attrs={'placeholder' : 'Postal Zip Code'}), label=False, required=False)
     phone_num = forms.IntegerField(widget=NumberInput(attrs={'placeholder' : 'Customer Service Phone Number'}), label=False, required=False)
     email = forms.EmailField(widget=EmailInput(attrs={'placeholder': 'Customer Service Email'}), label=False, required=False)
-    website = forms.CharField(widget=TextInput(attrs={"placeholder" : "Company's Website"}), label=False)
     is_credit_union = forms.BooleanField(label='Is this a Credit Union', required=False)
     
     

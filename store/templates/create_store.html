@@ -8,6 +8,8 @@ Create a Store
 
 {% block content %}
 <h1>Create a Store</h1>
+<br />
+<h5 style="color: red;">Only Store Name and Company's website are required.</h5>
 <form method="post" class="form-group">
     {% csrf_token %}
     {{form|crispy}}
