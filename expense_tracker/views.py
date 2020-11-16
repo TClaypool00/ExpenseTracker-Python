@@ -1,7 +1,7 @@
 from api.api import Api
 from django.shortcuts import redirect, render
 from forms import LoginForm, RegisterForm
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import logout, views as auth_views
 from forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from api import api
@@ -10,26 +10,25 @@ from api.bills import bill_url
 from api.subs import sub_url
 from api.misc import misc_url
 from api.budgets import budget_url, BudgetApi
+from django.contrib import auth
 
 @login_required()
 def index(request):
     user_id = request.user.userid
-    user_budget = api.Api.get_all(api, budget_url, user_id)
+    user_budget = BudgetApi.get(BudgetApi, user_id, budget_id=None)
+    user_bills = api.Api.get_all(api, bill_url, user_id)
+    user_loans = api.Api.get_all(api, loan_url, user_id)
+    user_subs = api.Api.get_all(api, sub_url, user_id)
+    user_misc = api.Api.get_all(api, misc_url, user_id)
+    CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc, 'budget' : user_budget}
     if request.method == 'POST':
         if user_budget is None:
             BudgetApi.create_budget(Api, user_id)
         else:
-            BudgetApi.update_budget(Api,user_id, user_budget.savingsMoney, user_budget.budgetId)
+            BudgetApi.update_budget(Api,user_id, 'budget.savingsMoney', 'budget.budgetId')
         
         return redirect('/')
     else:
-        user_bills = api.Api.get_all(api, bill_url, user_id)
-        user_loans = api.Api.get_all(api, loan_url, user_id)
-        user_subs = api.Api.get_all(api, sub_url, user_id)
-        user_misc = api.Api.get_all(api, misc_url, user_id)
-        
-        CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc, 'budget' : user_budget}
-    
         return render(request, "index.html", CONTEXT)
 
 
@@ -47,3 +46,8 @@ def register(request):
             form.save()
             return redirect('/login')
     return render(request, 'register.html', {'form': form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/login')
