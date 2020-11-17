@@ -31,3 +31,13 @@ class Api:
         req = request.Request(url, data=data)
         
         request.urlopen(req)
+        
+    def read_data(self, url):
+        try:
+            with request.urlopen(url) as all:
+                serial_data = all.read()
+                data = json.loads(serial_data)
+            
+            return data
+        except Exception:
+            return None
