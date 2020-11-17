@@ -28,3 +28,10 @@ def create(request):
             return redirect('/')
     else:
         return render(request, 'create_sub.html', CONTEXT)
+    
+
+@login_required()    
+def sub_details(request, id):
+    sub = api.get_sub_by_id(api, id)
+    
+    return render(request, 'sub_details.html', {'sub' : sub})

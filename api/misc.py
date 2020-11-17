@@ -10,3 +10,9 @@ class MiscApi(Api):
         url = misc_url + 'create.php'
         data = {'price' : price, 'storeId' : store_id, 'userId' : user_id, 'memo': memo, 'miscName' : misc_name}
         self.json_encode(self, url, data=data)
+        
+    
+    def get_misc_by_id(self, misc_id):
+        url = misc_url + 'get.php?miscId=' + str(misc_id)
+        
+        return self.read_data(Api, url)

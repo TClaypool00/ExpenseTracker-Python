@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bill Details
+{% endblock %}
+
+{% block content %}
+<h2>Bill Details</h2>
+<br />
+<p>Subscription Nickname: <input type="text" value="{{sub.subName}}" disabled /></p>
+<p>Subscription Due Date: <input type="text" value="{{sub.dueDate}}" disabled /></p>
+<p>Amount Due: <input type="text" value="{{sub.amountDue}}" disabled /></p>
+<p>Late?: <input type="text" value="{% if sub.isLate == '0' %} No {% else %} Yes {% endif %}" disabled /></p>
+<p>Paid?: <input type="text" value="{% if sub.isPaid == '0' %} No {% else %} Yes {% endif %}" disabled /></p>
+<p>Subscription Company: <input type="text" value="{{sub.storeName}}" disabled /></p>
+<p>Company's website <a href="https://{{sub.storeWebsite}}">{{sub.storeWebsite}}</a></p>
+{% endblock %}

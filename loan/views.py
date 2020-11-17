@@ -1,3 +1,4 @@
+from api.loan import LoanApi
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from api import stores, loan
@@ -29,3 +30,10 @@ def create(request):
             return redirect('/')
     else:
         return render(request, 'create_loan.html', CONTEXT)
+    
+    
+@login_required()
+def loan_details(request, id):
+    loan = LoanApi.get_by_id(Api, id)
+    
+    return render(request, 'loan_details.html', {'loan' : loan})

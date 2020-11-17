@@ -33,5 +33,6 @@ class BillsApi:
     
     def get_by_id(self, bill_id):
         url = bill_url + 'get.php?billId=' + str(bill_id)
+        
         return Api.read_data(Api, url)
         

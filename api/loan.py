@@ -3,6 +3,7 @@ from urllib import request
 from django.http.response import Http404
 from .api import base_url
 import json
+from api.api import Api
 
 loan_url = base_url + 'loan/'
 
@@ -33,3 +34,9 @@ class LoanApi:
         req = request.Request(url, data=data)
         
         request.urlopen(req)
+        
+    
+    def get_by_id(self, loan_id):
+        url = loan_url + 'get.php?loanId=' + str(loan_id)
+        
+        return Api.read_data(Api, url)

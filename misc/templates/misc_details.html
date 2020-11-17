@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Miscellaneous Details
+{% endblock %}
+
+{% block content %}
+<h2>Bill Details</h2>
+<br />
+<p>Miscellaneous Nickname: <input type="text" value="{{misc.miscName}}" disabled /></p>
+<p>Date: <input type="text" value="{{misc.date}}" disabled /></p>
+<p>Price: <input type="text" value="${{misc.price}}" disabled /></p>
+<p>Memo: <input type="text" value="{{misc.memo}}" disabled></p>
+<p style="color:red">Store info will be added soon</p>
+
+<a href="/">Go back</a>
+
+{% endblock %}

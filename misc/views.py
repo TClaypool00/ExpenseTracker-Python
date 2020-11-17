@@ -29,3 +29,10 @@ def create(request):
             return redirect('/')
     else:
         return render(request, 'create_misc.html', CONTEXT)
+    
+    
+@login_required()
+def misc_details(request, id):
+    misc = api.get_misc_by_id(api, id)
+    
+    return render(request, 'misc_details.html', {'misc' : misc})

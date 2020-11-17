@@ -81,6 +81,7 @@ Track your expenses!
                 <td>{{loan.dueDate}}</td>
                 <td>${{loan.monthlyAmountDue}}</td>
                 <td><a href="https://{{loan.storeWebsite}}" target="_blank">{{loan.storeWebsite}}</a></td>
+                <td><a href="loan/details/{{loan.loanId}}">Details</a></td>
             </tr>
             {% endfor %}
         {% endif %}
@@ -109,6 +110,7 @@ Track your expenses!
                     <td>${{sub.amountDue}}</td>
                     <td>{{sub.storeName}}</td>
                     <td><a href="https://{{sub.storeWebsite}}" target="_blank">{{sub.storeWebsite}}</a></td>
+                    <td><a href="subscription/details/{{sub.subId}}">Details</a></td>
                 </tr>
                 {% endfor %}
             {% endif %}
@@ -133,8 +135,9 @@ Track your expenses!
                 {% for misc in miscs %}
                     <td>{{misc.date}}</td>
                     <td>{{misc.miscName}}</td>
-                    <td>{{misc.price}}</td>
+                    <td>${{misc.price}}</td>
                     <td>{{misc.storeName}}</td>
+                    <td><a href="misc/details/{{misc.miscId}}">Details</a></td>
                 </tr>
                 {% endfor %}
             {% endif %}

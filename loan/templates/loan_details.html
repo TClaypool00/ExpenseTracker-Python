@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Loan Details
+{% endblock %}
+
+{% block content %}
+<h2>Loan Details</h2>
+<br />
+<p>Loan Nickname: <input type="text" value="{{loan.loanName}}" disabled /></p>
+<p>Loan Due Date: <input type="text" value="{{loan.dueDate}}" disabled /></p>
+<p>Monthly Amount Due: <input type="text" value="${{loan.monthlyAmountDue}}" disabled /></p>
+<p>Total Amount of loan: <input type="text" value="${{loan.totalAmountDue}}" disabled /></p>
+<p>Amount Remaining: <input type="text" value="${{loan.amountRemaining}}" disabled /></p>
+<p>Deposit: <input type="text" value="${{loan.deposit}}" disabled /></p>
+<p>Credit Union: <input type="text" value="{{loan.storeName}}" disabled /></p>
+<p>Credit Union Website: <a href="https//{{loan.storeWebsite}}">{{loan.storeWebsite}}</a></p>
+
+<a href="/">Go back</a>
+
+{% endblock %}
