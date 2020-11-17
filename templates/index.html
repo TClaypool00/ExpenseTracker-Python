@@ -11,7 +11,7 @@ Track your expenses!
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="/bills/create">Create a Bill</a>
         <a class="dropdown-item" href="/loan/create">Create a Loan</a>
-        <a href="/subscription/create" class="dropdown-item" aria-disabled="tr">Create a Subscription</a>
+        <a href="/subscription/create" class="dropdown-item">Create a Subscription</a>
         {% if budget is not None %}<a href="/misc/create" class="dropdown-item">Create a Miscellaneous </a>{% endif %}
     </div>
 </div>
@@ -35,9 +35,6 @@ Track your expenses!
             <th scope="col">Nickname</th>
             <th scope="col">Due Date</th>
             <th scope="col">Price</th>
-            <th scope="col">Late?</th>
-            <th scope="col">Paid?</th>
-            <th scope="col">Store</th>
             <th scope="col">Store's Website</th>
         </tr>
     </thead>
@@ -52,10 +49,10 @@ Track your expenses!
                 <td>{{bill.billName}}</td>
                 <td>{{bill.billDate}}</td>
                 <td>${{bill.billPrice}}</td>
-                <td>{% if bill.isLate == '0' %} No {% else %} Yes {% endif %}</td>
-                <td>{% if bill.isPaid == '0' %} No {% else %} Yes {% endif %}</td>
-                <td>{{bill.storeName}}</td>
                 <td><a href="https://{{bill.storeWebsite}}" target="_blank">{{bill.storeWebsite}}</a></td>
+                <td><a href="bills/details/{{bill.billId}}">Details</a></td>
+                <td><a href="bills/edit/{{billId}}">Edit</a></td>
+                <td><a href="bills/delete/{{billId}}">Delete</a></td>
             </tr>
             {% endfor %}
         {% endif %}
@@ -69,12 +66,6 @@ Track your expenses!
             <th scope="col">Nickname</th>
             <th scope="col">Due Date</th>
             <th scope="col">Amount Due(Monthly)</th>
-            <th scope="col">Deposit</th>
-            <th scope="col">Total Amount Due</th>
-            <th scope="col">Amount Remaining</th>
-            <th scope="col">Paid?</th>
-            <th scope="col">Late?</th>
-            <th scope="col">Store</th>
             <th scope="col">Store's Website</th>
         </tr>
     </thead>
@@ -89,12 +80,6 @@ Track your expenses!
                 <td>{{loan.loanName}}</td>
                 <td>{{loan.dueDate}}</td>
                 <td>${{loan.monthlyAmountDue}}</td>
-                <td>${{loan.deposit}}</td>
-                <td>${{loan.totalAmountDue}}</td>
-                <td>${{loan.amountRemaining}}</td>
-                <td>{% if loan.isLate == '0' %} No {% else %} Yes {% endif %}</td>
-                <td>{% if loan.isPaid == '0' %} No {% else %} Yes {% endif %}</td>
-                <td>{{loan.storeName}}</td>
                 <td><a href="https://{{loan.storeWebsite}}" target="_blank">{{loan.storeWebsite}}</a></td>
             </tr>
             {% endfor %}
@@ -109,8 +94,6 @@ Track your expenses!
             <th scope="col">Nickname</th>
             <th scope="col">Due Date</th>
             <th scope="col">Price</th>
-            <th scope="col">Late?</th>
-            <th scope="col">Paid?</th>
             <th scope="col">Store</th>
             <th scope="col">Store's Website</th>
         </tr>
@@ -119,20 +102,16 @@ Track your expenses!
         <tr>
             {% if subs == None %}
                 <td colspan="7" style="text-align: center;">You have no Subscriptions.</td>
-                
             {% else %}
                 {% for sub in subs %}
                     <td>{{sub.subName}}</td>
                     <td>{{sub.dueDate}}</td>
                     <td>${{sub.amountDue}}</td>
-                    <td>{% if sub.isLate == '0' %} No {% else %} Yes {% endif %}</td>
-                    <td>{% if sub.isPaid == '0' %} No {% else %} Yes {% endif %}</td>
                     <td>{{sub.storeName}}</td>
                     <td><a href="https://{{sub.storeWebsite}}" target="_blank">{{sub.storeWebsite}}</a></td>
                 </tr>
                 {% endfor %}
             {% endif %}
-        
     </tbody>
 </table>
 <br />
@@ -143,7 +122,6 @@ Track your expenses!
             <th scope="col">Date</th>
             <th scope="col">Title</th>
             <th scope="col">Price</th>
-            <th scope="col">Memo</th>
             <th scope="col">Store</th>
         </tr>
     </thead>
@@ -156,7 +134,6 @@ Track your expenses!
                     <td>{{misc.date}}</td>
                     <td>{{misc.miscName}}</td>
                     <td>{{misc.price}}</td>
-                    <td>{{misc.memo}}</td>
                     <td>{{misc.storeName}}</td>
                 </tr>
                 {% endfor %}
