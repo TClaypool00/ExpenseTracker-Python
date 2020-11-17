@@ -40,8 +40,16 @@
             <a class="nav-link" href="/users/">Search for Users</a>
           </li>
           {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">Hi, {{user.firstname}}!</a>
+          <li class="dropdown nav-item">
+            <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Hi, {{user.firstname}}!
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">Edit Profile</a>
+              <a class="dropdown-item" href="#">My Budget</a>
+              <a href="update-password" class="dropdown-item">Change Password</a>
+            </div>
           </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">Logout</a>
