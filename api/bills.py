@@ -1,7 +1,7 @@
 from urllib import request
 
 from django.http.response import Http404
-from .api import base_url
+from .api import base_url, Api
 import json
 
 bill_url = base_url + "bills/"
@@ -29,3 +29,9 @@ class BillsApi:
         req = request.Request(url, data=data)
 
         request.urlopen(req)
+        
+    
+    def get_by_id(self, bill_id):
+        url = bill_url + 'get.php?billId=' + str(bill_id)
+        return Api.read_data(Api, url)
+        

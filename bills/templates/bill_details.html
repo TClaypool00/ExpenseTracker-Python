@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bill Details
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Bill Details</h2>
+<br />
+<p>Bill Nickname: <input type="text" value="{{bill.billName}}" disabled /></p>
+<p>Due Date: <input type="text" value="{{bill.billDate}}" disabled /></p>
+<p>Price: <input type="text" value="{{bill.billPrice}}" disabled /></p>
+<p>Late?<input type="text" value="{% if bill.isLate == '0' %} No {% else %} Yes {% endif %}" disabled /></p>
+<p>Paid yet?<input type="text" value="{% if bill.isPaid == '0' %} No {% else %} Yes {% endif %}" disabled /></p>
+<p>From store: <input type="text" value="{{bill.storeName}}" disabled /></p>
+<p>Store Website: <a href="http://{{bill.storeWebsite}}">{{bill.storeWebsite}}</a></p>
+
+<a href="/">Go back</a>
+
+{% endblock %}

@@ -29,3 +29,10 @@ def create(request):
             return redirect('/')
     else:
         return render(request, 'create_bill.html', CONTEXT)
+    
+    
+@login_required()
+def bill_details(request, id):
+    bill = api.get_by_id(api, id)
+    
+    return render(request, 'bill_details.html', {'bill' : bill})
