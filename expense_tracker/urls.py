@@ -31,4 +31,5 @@ urlpatterns = [
     path('store/', include('store.urls')),
     path('subscription/', include('subscription.urls')),
     path('logout/', views.logout_user),
+    path('update-password/', views.change_password),
 ]
