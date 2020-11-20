@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'misc.apps.MiscConfig',
     'store.apps.StoreConfig',
     'subscription.apps.SubscriptionConfig',
+    'budget.apps.BudgetConfig',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
             'misc/templates',
             'store/templates',
             'subscription/templates',
+            'budget/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

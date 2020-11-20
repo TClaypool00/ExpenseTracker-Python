@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{user.firstname}}'s Budget
+{% endblock %}
+
+{% block content %}
+<h2>{{user.firstname}}'s Budget</h2>
+<br />
+<form method="post" class="form-group">
+    {% csrf_token %}
+    <p>Total Amount of Bills: ${{budget.totalBills}}</p>
+    <p>Money Remaining: ${{budget.moneyLeft}}</p>
+    <p>Savings: $<input type="text" name="savings" value="{{budget.savingsMoney}}" style="width: 30%;" /></p>
+    <br />
+    <button type="submit" class="btn btn-primary">Update Budget</button>
+</form>
+
+<a href="/">Go Back Home</a>
+{% endblock %}

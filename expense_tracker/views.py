@@ -27,7 +27,7 @@ def index(request):
     if request.method == 'POST':
         BudgetApi.create_budget(Api, user_id)
         
-        return redirect('/')
+        return redirect('/myBudget/edit')
     else:
         return render(request, "index.html", CONTEXT)
 

@@ -30,6 +30,7 @@ urlpatterns = [
     path('misc/', include('misc.urls')),
     path('store/', include('store.urls')),
     path('subscription/', include('subscription.urls')),
+    path('myBudget/', include('budget.urls')),
     path('logout/', views.logout_user),
     path('update-password/', views.change_password),
 ]
