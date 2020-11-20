@@ -5,6 +5,7 @@ from api.stores import StoreApi as stores
 from django.contrib.auth.decorators import login_required
 from api.budgets import BudgetApi
 from api.api import Api
+from datetime import date
 
 @login_required()
 def create(request):
@@ -17,7 +18,7 @@ def create(request):
         form = CreateSubForm(request.POST)
         if form.is_valid():
             sub_name = form.cleaned_data['sub_name']
-            due_date = form.cleaned_data['due_date']
+            due_date = request.POST.get('dueDate', date.today())
             price = form.cleaned_data['price']
             store_id = request.POST.get('storeList', 1)
             

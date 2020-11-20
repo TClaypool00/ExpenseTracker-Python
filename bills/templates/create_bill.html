@@ -11,6 +11,8 @@ Create a bill
 <form method="post" class="form-group">
     {% csrf_token %}
     {{form|crispy}}
+    <input type="date" name="dueDate" />
+    <br />
     <label for="stores">Select a Store</label>
     <select name="storeList" id="stores">
         {% if stores is not None %}

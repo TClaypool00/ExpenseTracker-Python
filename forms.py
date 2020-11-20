@@ -25,14 +25,12 @@ class LoginForm(AuthenticationForm):
 
 class CreateBillForm(forms.Form):
     bill_name = forms.CharField(widget=TextInput(attrs={'placeholder': 'Bill Nickname'}), label=False)
-    bill_date = forms.CharField(widget=TextInput(attrs=DUE_DATE), label=False)
     bill_price = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Price of Bill'}), label=False)
     is_late = forms.BooleanField(required=False, widget=HiddenInput)
     
 
 class CreateLoanForm(forms.Form):
     loan_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Loan Nickname'}), label=False)
-    due_date = forms.CharField(widget=TextInput(attrs=DUE_DATE), label=False)
     deposit = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Deposit'}), label=False)
     monthly_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Monthly Amount Due'}), label=False)
     total_amt_due = forms.FloatField(widget=NumberInput(attrs={'placeholder': 'Total Amount Due'}), label=False)
@@ -57,5 +55,4 @@ class CreateMiscForm(forms.Form):
     
 class CreateSubForm(forms.Form):
     sub_name = forms.CharField(widget=TextInput(attrs={'placeholder' : 'Name'}), label=False)
-    due_date = forms.CharField(widget=TextInput(attrs=DUE_DATE), label=False)
     price = forms.FloatField(widget=NumberInput(attrs={'placeholder' : 'Price'}), label=False)
