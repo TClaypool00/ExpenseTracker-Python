@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Welcome to the Community!
+{% endblock %}
+
+{% block content %}
+<h1>Community Posts!</h1>
+<p>This is where you can post questions, ideas, suggestions on how to save money.</p>
+<br />
+<form method="GET">
+    <input type="text" name="search" />
+    <button type="submit" class="btn btn-primary">Search!</button>
+</form>
+<br />
+<p>Can't find what you're looking for? <a href="#" class="btn btn-primary">Create a Post!</a></p>
+{% endblock %}

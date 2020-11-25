@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'subscription.apps.SubscriptionConfig',
     'budget.apps.BudgetConfig',
+    'community.apps.CommunityConfig',
 ]
 
 MIDDLEWARE = [
