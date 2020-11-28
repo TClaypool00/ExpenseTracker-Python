@@ -24,7 +24,7 @@ def create(request):
             
             api.create_misc(api, price, store_id, user_id, memo, misc_name)
             if user_budget is not None:
-                BudgetApi.update_budget(Api,user_id, 'budget.savingsMoney', 'budget.budgetId')
+                BudgetApi.update_budget(Api, user_id, user_budget['savingsMoney'], user_budget['budgetId'])
             
             return redirect('/')
     else:

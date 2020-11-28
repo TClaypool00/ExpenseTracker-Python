@@ -25,7 +25,7 @@ def create(request):
             
             api.create_bill(request, bill_name, str(bill_date), bill_price, is_late, store_id, user_id)
             if user_budget is not None:
-                BudgetApi.update_budget(Api,user_id, 'budget.savingsMoney', 'budget.budgetId')
+                BudgetApi.update_budget(Api, user_id, user_budget['savingsMoney'], user_budget['budgetId'])
             
             return redirect('/')
     else:
