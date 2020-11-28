@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<br />
+<h2>{{post.title}}</h2>
+<h4>{{post.postBody}}</h4>
+<p>{{post.date}}</p>
+<h2>{{post.userFirstName}} {{post.userLastName}}</h2>
+<br />
+<form action="/reply/create" method="post">
+    <input type="text" />
+    <button type="submit" class="btn btn-primary">Reply</button>
+</form>
+
+{% endblock %}
