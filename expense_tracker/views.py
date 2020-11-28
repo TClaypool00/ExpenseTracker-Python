@@ -9,16 +9,20 @@ from api.loan import loan_url
 from api.bills import bill_url
 from api.subs import sub_url
 from api.misc import misc_url
-from api.budgets import budget_url, BudgetApi
+from api.budgets import BudgetApi
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from datetime import datetime
 
 
 @login_required()
 def index(request):
     user_id = request.user.userid
     user_budget = BudgetApi.get(BudgetApi, user_id, budget_id=None)
+    today = datetime.now()
+    if today.day == 1:
+        BudgetApi.update_budget(BudgetApi, user_id, user_budget['savingsMoney'], user_budget['budgetId'])
     user_bills = api.Api.get_all(api, bill_url, user_id)
     user_loans = api.Api.get_all(api, loan_url, user_id)
     user_subs = api.Api.get_all(api, sub_url, user_id)
