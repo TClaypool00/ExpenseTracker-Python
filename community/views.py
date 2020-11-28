@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required()
 def community_index(request):
-    all_posts = Api.get_all(Api, posts_url, user_id=None)
-    return render(request, 'community_index.html')
+    search = request.GET.get('search')
+    all_posts = Api.get_all(Api, posts_url, search, user_id=None)
+    return render(request, 'community_index.html', {'posts' : all_posts})
 
 @login_required()
 def create_post(request):
@@ -20,3 +21,8 @@ def create_post(request):
     else:
         form = CreatePostForm
         return render(request, 'create_post.html', {'form' : form})
+    
+@login_required()
+def post_details(request, id):
+    post = PostsApi.post_by_id(PostsApi, id)
+    return render(request, 'post_details.html', {'post' : post})

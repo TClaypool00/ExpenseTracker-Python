@@ -2,6 +2,20 @@
     float: right;
 }
 
+a:link, a:visited {
+    text-decoration: none;
+}
+
+a.posts {
+    padding: 14px 25px;
+    color: black;
+}
+
+a.posts:hover {
+    text-decoration: none;
+    color: initial;
+}
+
 button {
     margin-left: 3em;
 }

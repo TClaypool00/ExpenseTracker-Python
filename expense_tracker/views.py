@@ -23,10 +23,10 @@ def index(request):
     today = datetime.now()
     if today.day == 1:
         BudgetApi.update_budget(BudgetApi, user_id, user_budget['savingsMoney'], user_budget['budgetId'])
-    user_bills = api.Api.get_all(api, bill_url, user_id)
-    user_loans = api.Api.get_all(api, loan_url, user_id)
-    user_subs = api.Api.get_all(api, sub_url, user_id)
-    user_misc = api.Api.get_all(api, misc_url, user_id)
+    user_bills = api.Api.get_all(Api, bill_url, search=None, user_id=user_id)
+    user_loans = api.Api.get_all(Api, loan_url, search=None, user_id=user_id)
+    user_subs = api.Api.get_all(Api, sub_url, search=None, user_id=user_id)
+    user_misc = api.Api.get_all(Api, misc_url, search=None, user_id=user_id)
     CONTEXT = {'bills' : user_bills, 'loans' : user_loans, 'subs' : user_subs, 'miscs' : user_misc, 'budget' : user_budget}
     if request.method == 'POST':
         BudgetApi.create_budget(Api, user_id)

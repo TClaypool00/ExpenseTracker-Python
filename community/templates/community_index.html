@@ -4,14 +4,35 @@
 Welcome to the Community!
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
-<h1>Community Posts!</h1>
+<h1>Welcome to the Community!</h1>
 <p>This is where you can post questions, ideas, suggestions on how to save money.</p>
 <br />
+<p class="float-right">Can't find what you're looking for? <a href="/community/posts/create" class="btn btn-primary">Create a Post!</a></p>
 <form method="GET">
     <input type="text" name="search" />
     <button type="submit" class="btn btn-primary">Search!</button>
 </form>
 <br />
-<p>Can't find what you're looking for? <a href="/community/posts/create" class="btn btn-primary">Create a Post!</a></p>
+{% if posts is None %}
+    <p>No Posts yet! Be the first to create a Posts!</p>
+{% else %}
+    {% for post in posts %}
+    <a class="posts" href="/community/posts/details/{{post.postId}}">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="float-right">{{post.userFirstName}} {{post.userLastName}}</h6>
+                <h5 class="card-title">{{post.title}}</h5>
+                <h6 class="float-right">{{post.date}}</h6>
+                <p>{{post.postBody}}</p>
+            </div>
+        </div>
+    </a>
+    <br />
+    {% endfor %}
+{% endif %}
+<br />
+
 {% endblock %}
