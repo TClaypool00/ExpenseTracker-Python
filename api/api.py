@@ -8,8 +8,13 @@ class Api:
         self.base_url = "http://localhost/ExpenseTrackerAPI-PHP/api/"
     
     def get_all(self, url,  user_id):
+        all_url = url + 'all.php'
         try:
-            with request.urlopen(url + 'all.php?userId=' + str(user_id)) as all:
+            if user_id is None:
+                all_url
+            else:
+                all_url + '?userId=' + str(user_id)
+            with request.urlopen(all_url) as all:
                 serial_data = all.read()
                 data = json.loads(serial_data)
             
