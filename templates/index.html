@@ -41,7 +41,7 @@ Track your expenses!
     <tbody>
         {% if bills == None %}
         <tr>
-            <td colspan="7" style="text-align: center;">You have no Bills.</td>
+            <td colspan="4" style="text-align: center;">You have no Bills.</td>
         </tr>
         {% else %}
             {% for bill in bills %}
@@ -72,7 +72,7 @@ Track your expenses!
     <tbody>
         {% if loans == None %}
         <tr>
-            <td colspan="10" style="text-align: center;">You have no Loans.</td>
+            <td colspan="4" style="text-align: center;">You have no Loans.</td>
         </tr>
         {% else %}
             {% for loan in loans %}
@@ -102,7 +102,7 @@ Track your expenses!
     <tbody>
         <tr>
             {% if subs == None %}
-                <td colspan="7" style="text-align: center;">You have no Subscriptions.</td>
+                <td colspan="5" style="text-align: center;">You have no Subscriptions.</td>
             {% else %}
                 {% for sub in subs %}
                     <td>{{sub.subName}}</td>
@@ -130,7 +130,7 @@ Track your expenses!
     <tbody>
         <tr>
             {% if miscs == None %}
-                <td colspan="5" style="text-align: center;">You have no Miscellaneous.</td>
+                <td colspan="4" style="text-align: center;">You have no Miscellaneous.</td>
             {% else %}
                 {% for misc in miscs %}
                     <td>{{misc.date}}</td>
