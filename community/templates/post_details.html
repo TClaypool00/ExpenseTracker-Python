@@ -8,14 +8,31 @@
 
 {% block content %}
 <br />
-<h2>{{post.title}}</h2>
-<h4>{{post.postBody}}</h4>
-<p>{{post.date}}</p>
-<h2>{{post.userFirstName}} {{post.userLastName}}</h2>
+<div class="center">
+    <h3 class="card-title">{{post.title}}</h3>
+    <h6 class="float-right">{{post.date}}</h6>
+    <br>
+    <p>{{post.postBody}}</p>
+    <p><strong>{{post.userFirstName}} {{post.userLastName}}</strong></p>
+</div>
 <br />
-<form action="/reply/create" method="post">
-    <input type="text" />
-    <button type="submit" class="btn btn-primary">Reply</button>
+<form action="/reply/create" method="post" style="display: flex;">
+    <textarea id="replyBody" name="replyBody" rows="1" placeholder="Enter a reply" style="width: 75%;"></textarea>
+    <button type="submit" class="btn btn-primary" class="float-right" style="margin-left: 1em;">Reply</button>
 </form>
-
+<br />
+<h3>Replies:</h3>
+{% if replies is not None %}
+    {% for reply in replies %}
+    <div class="card">
+        <div class="card-body">
+            <p class="float-right"><strong>Date: </strong>{{reply.date}}</p>
+            <p>{{reply.replyBody}}</p>
+            <p></p>
+            <p class="float-right"><strong>{{reply.userFirstName}} {{reply.userLastName}}</strong></p>
+            <br />
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}
