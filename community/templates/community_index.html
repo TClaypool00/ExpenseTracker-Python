@@ -10,15 +10,14 @@ Welcome to the Community!
 <h1>Welcome to the Community!</h1>
 <p>This is where you can post questions, ideas, suggestions on how to save money.</p>
 <br />
-<p class="float-right">Can't find what you're looking for? <a href="/community/posts/create" class="btn btn-primary">Create a Post!</a></p>
 <form method="GET">
-    <input type="text" name="search" />
+    <input type="text" name="search" {% if search is not None %} value="{{search}}" {% endif %} />
     <button type="submit" class="btn btn-primary">Search!</button>
+    <br />
+    <a href="{{request.path}}">Clear Search</a>
 </form>
 <br />
-{% if posts is None %}
-    <p>No Posts yet! Be the first to create a Posts!</p>
-{% else %}
+{% if posts is not None %}
     {% for post in posts %}
     <a class="posts" href="/community/posts/details/{{post.postId}}">
         <div class="card">
@@ -32,7 +31,12 @@ Welcome to the Community!
     </a>
     <br />
     {% endfor %}
+{% else %}
+    {% if search is not None %}
+    <p>No posts contains "{{search}}". <a href="/community/posts/create">Create a Post!</a></p>
+    {% else %}
+        <p>No Posts yet</p>
+    {% endif %}
 {% endif %}
 <br />
-
 {% endblock %}
