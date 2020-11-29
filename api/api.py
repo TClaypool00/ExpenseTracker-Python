@@ -7,16 +7,17 @@ class Api:
     def __init__(self):
         self.base_url = "http://localhost/ExpenseTrackerAPI-PHP/api/"
     
-    def get_all(self, url, search, user_id):
-        all_url = url + 'all.php'
+    def get_all(self, url, user_id, search, post_id):
         try:
-            if user_id is None:
-                if search is None:
-                    all_url
-                else:
-                    all_url + '?search=' + search
-            else:
-                all_url + '?userId=' + str(user_id)
+            all_url = url + 'all.php'
+            
+            if user_id is not None:
+                all_url += '?userId=' + str(user_id)
+            if user_id is None and search is not None:
+                all_url += '?search=' + search
+            if post_id is not None:
+                all_url += '?postId=' + str(post_id)
+                
             with request.urlopen(all_url) as all:
                 serial_data = all.read()
                 data = json.loads(serial_data)
