@@ -34,4 +34,5 @@ urlpatterns = [
     path('logout/', views.logout_user),
     path('update-password/', views.change_password),
     path('community/', include('community.urls')),
+    path('myCalendar/', include('cal.urls')),
 ]

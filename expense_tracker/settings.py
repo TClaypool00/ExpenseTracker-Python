@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'subscription.apps.SubscriptionConfig',
     'budget.apps.BudgetConfig',
     'community.apps.CommunityConfig',
+    'cal.apps.CalConfig',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,7 @@ TEMPLATES = [
             'store/templates',
             'subscription/templates',
             'budget/templates',
+            'cal/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
